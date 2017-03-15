@@ -11,7 +11,7 @@ let router = express.Router();
 let mongoose = require('mongoose');
 
 // define the book model
-let book = require('../models/books');
+let contactlist = require('../models/contactslist');
 
 // create a function to check if the user is authenticated
 function requireAuth(req, res, next) {
@@ -26,14 +26,14 @@ function requireAuth(req, res, next) {
 /* GET books List page. READ */
 router.get('/', requireAuth, (req, res, next) => {
   // find all books in the books collection
-  book.find((err, books) => {
+  contactlist.find((err, contactslist) => {
     if (err) {
       return console.error(err);
     }
     else {
-      res.render('books/index', {
-        title: 'Books',
-        books: books,
+      res.render('contactslist/index', {
+        title: 'Business Contacts List',
+        books: contactslist,
         displayName: req.user.displayName
       });
     }
@@ -48,9 +48,9 @@ router.get('/add', requireAuth, (req, res, next) => {
    * ADD CODE HERE *
    *****************/
 
-  res.render('books/details', {
-    title: "Add a new Book",
-    books: '',
+  res.render('contactslist/details', {
+    title: "Add a new Contact",
+    contactslist: '',
     displayName: req.user.displayName
   });
 
@@ -63,21 +63,19 @@ router.post('/add', requireAuth, (req, res, next) => {
    * ADD CODE HERE *
    *****************/
 
-  let newBook = new book({
-    "Title": req.body.booktitle,
-    "Description": "",
-    "Price": req.body.price,
-    "Author": req.body.author,
-    "Genre": req.body.genre
+  let newContact = new contactlist({
+    "Contact Name": req.contactlist.contactname,
+    "Contact Number": req.contactlist.contactnumber,
+    "Email Address": req.contactlist.emailaddress
   });
 
-  book.create(newBook, (err, book) => {
+  contactlist.create(newContact, (err, contactlist) => {
     console.log(req, res)
     if (err) {
       console.log(err);
       res.end(err);
     } else {
-      res.redirect('/books');
+      res.redirect('/contactslist');
     }
   });
 
@@ -96,15 +94,15 @@ router.get('/:id', requireAuth, (req, res, next) => {
     let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
 
     // find one book by its id
-    book.findById(id, (err, books) => {
+    contactlist.findById(id, (err, contactslist) => {
       if (err) {
         console.log(err);
         res.end(error);
       } else {
         // show the book details view
-        res.render('books/details', {
-          title: 'Book Details',
-          books: books,
+        res.render('contactslist/details', {
+          title: 'Contact Details',
+          contactslist: contactslist,
           displayName: req.user.displayName
         });
       }
@@ -126,22 +124,20 @@ router.post('/:id', requireAuth, (req, res, next) => {
   // get a reference to the id from the url
   let id = req.params.id;
 
-  let updatedBook = book({
+  let updatedContact = contactlist({
     "_id": id,
-    "Title": req.body.booktitle,
-    "Description": "",
-    "Price": req.body.price,
-    "Author": req.body.author,
-    "Genre": req.body.genre
+    "Contact Name": req.contactlist.contactname,
+    "Contact Number": req.contactlist.contactnumber,
+    "Email Address": req.contactlist.emailaddress
   });
 
-  book.update({ _id: id }, updatedBook, (err) => {
+  contactlist.update({ _id: id }, updatedContact, (err) => {
     if (err) {
       console.log(err);
       res.end(err);
     } else {
       // refresh the books List
-      res.redirect('/books');
+      res.redirect('/contactslist');
     }
   });
 
@@ -156,13 +152,13 @@ router.get('/delete/:id', requireAuth, (req, res, next) => {
   // get a reference to the id from the url
   let id = req.params.id;
 
-  book.remove({ _id: id }, (err) => {
+  contactlist.remove({ _id: id }, (err) => {
     if (err) {
       console.log(err);
       res.end(err);
     } else {
       // refresh the games list
-      res.redirect('/books');
+      res.redirect('/contactslist');
     }
   });
 

@@ -16,7 +16,7 @@ let UserModel = require('../models/users');
 let User = UserModel.User; // alias for User Model - User object
 
 // define the game model
-let book = require('../models/books');
+let contactlist = require('../models/contactslist');
 
 
 // create a function to check if the user is authenticated
@@ -32,7 +32,7 @@ function requireAuth(req, res, next) {
 router.get('/', (req, res, next) => {
   res.render('content/index', {
     title: 'Home',
-    books: '',
+    contactslist: '',
     displayName: req.user ? req.user.displayName : ''
    });
 });
@@ -46,19 +46,19 @@ router.get('/login', (req, res, next)=>{
     // render the login page
     res.render('auth/login', {
       title: "Login",
-      books: '',
+      contactslist: '',
       messages: req.flash('loginMessage'),
       displayName: req.user ? req.user.displayName : ''
     });
     return;
   } else {
-    return res.redirect('/books'); // redirect to games list
+    return res.redirect('/contactslist'); // redirect to games list
   }
 }); 
 
 // POST /login - process the login attempt
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/books',
+  successRedirect: '/contactslist',
   failureRedirect: '/login',
   failureFlash: 'bad login'
 }));
@@ -71,13 +71,13 @@ router.get('/register', (req, res, next)=>{
     // render the registration page
       res.render('auth/register', {
       title: "Register",
-      books: '',
+      contactslist: '',
       messages: req.flash('registerMessage'),
       displayName: req.user ? req.user.displayName : ''
     });
     return;
   } else {
-    return res.redirect('/books'); // redirect to games list
+    return res.redirect('/contactslist'); // redirect to games list
   }
 });
 
@@ -98,14 +98,14 @@ router.post('/register', (req, res, next)=>{
         }
         return res.render('auth/register', {
           title: "Register",
-          books: '',
+          contactslist: '',
           messages: req.flash('registerMessage'),
           displayName: req.user ? req.user.displayName : ''
         });
       }
       // if registration is successful
       return passport.authenticate('local')(req, res, ()=>{
-        res.redirect('/books');
+        res.redirect('/contactslist');
       });
     });
 });

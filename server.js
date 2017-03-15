@@ -6,7 +6,7 @@ Web app name: https://comp308-2017-midterm-300869349.herokuapp.com/
 
 */
 let app = require('./server/app');
-let debug = require('debug')('comp308-w2017-midterm:server');
+let debug = require('debug')('comp308-assignment-2:server');
 let http = require('http');
 
 /**

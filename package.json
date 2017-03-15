@@ -1,6 +1,5 @@
-
 {
-  "name": "comp308-w2017-midterm",
+  "name": "comp308-assignment-2",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -20,7 +19,7 @@
     "node": ">=6.0.0",
     "npm": ">=3.5.0"
   },
-  "description": "## Welcome to the MidTerm Project - the Favourite Book List App",
+  "description": "## Assignment-2 - Authentication",
   "main": "server.js",
   "devDependencies": {
     "@types/body-parser": "0.0.33",
@@ -34,14 +33,17 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/Navjot304/Assignment-2-Navjot.git"
   },
   "keywords": [
     "NodeJS",
     "ExpressJS",
     "EJS"
   ],
-  "author": "Tom Tsiliopoulos",
+  "author": "Navjot Kaur",
   "license": "ISC",
-  "homepage": ""
+  "homepage": "https://github.com/Navjot304/Assignment-2-Navjot",
+  "bugs": {
+    "url": "https://github.com/Navjot304/Assignment-2-Navjot/issues"
+  }
 }

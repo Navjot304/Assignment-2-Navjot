@@ -11,40 +11,38 @@ Web app name: https://comp308-2017-midterm-300869349.herokuapp.com/
     <div class="container">
       <div class="row">
         <div class="col-md-offset-1 col-md-10">
-          <h3>Favourite Books List </h3>
+          <h3>Business Contacts List </h3>
           
           <!-- ------------------------ -->
           <!-- FIX THE ADD BUTTON BELOW -->
           <!-- ------------------------ -->
-          <div class="clearfix"><a href="/books/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a></div>          
+          <div class="clearfix"><a href="/contactslist/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a contact</a></div>          
           <br>
           <div class="clearfix"></div>
           <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th class="text-center">Price</th>
-                  <th class="text-center">Author</th>
-                  <th class="text-center">Genre</th>
+                  <th>Contact Name</th>
+                  <th class="text-center">Contact Number</th>
+                  <th class="text-center">Email Address</th>
                   <th class="text-center"></th>
                   <th class="text-center"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- Template Row -->
-                <% for (let count = 0; count < books.length; count++) { %>
+                <% for (let count = 0; count < contactslist.length; count++) { %>
                 <tr>
-                  <td><%= books[count].Title %></td>
-                  <td class="text-center">$<%= books[count].Price %></td>
-                  <td class="text-center"><%= books[count].Author %></td>
-                  <td class="text-center"><%= books[count].Genre %></td>
+                  <td><%= contactslist[count].Name %></td>
+                  <td class="text-center">$<%= contactslist[count].Number %></td>
+                  <td class="text-center"><%= contactslist[count].Email %></td>
 
                   <td class="text-center">
                     <!-- ------------------------ -->
                     <!-- ADD the EDIT BUTTON HERE -->
                     <!-- ------------------------ -->
-                     <a href="/books/<%= books[count]._id %>" class="btn btn-primary">
+                     <a href="/contactslist/<%= contactslist[count]._id %>" class="btn btn-primary">
                     <i class="fa fa-pencil-square-o"></i> Edit</a>
                   </td>
 
@@ -52,7 +50,7 @@ Web app name: https://comp308-2017-midterm-300869349.herokuapp.com/
                     <!-- ------------------------ -->
                     <!-- ADD the DELETE BUTTON HERE -->
                     <!-- ------------------------ -->
-                    <a href="/books/delete/<%= books[count]._id %>" class="btn btn-danger">
+                    <a href="/contactslist/delete/<%= contactslist[count]._id %>" class="btn btn-danger">
                     <i class="fa fa-trash-o"></i> Delete</a>
                   </td>
                 </tr>
