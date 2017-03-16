@@ -10,5 +10,5 @@ module.exports = {
   //local MongoDB deployment ->
  // "URI": "mongodb://localhost/contactlist308"
   //Remote MongoDB deployment -> let 
-  "URI": "mongodb://navjot:navjot@22gill@ds161059.mlab.com:61059/contactslist308"
+  "URI": "mongodb://thomas:123456@ds161059.mlab.com:61059/contactslist308"
 };
