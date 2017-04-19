@@ -37,7 +37,7 @@ db.once('open', () => {
 
 // define routers
 let index = require('./routes/index'); // top level routes
-let contactslist = require('./routes/contactslist'); // routes for contactslist
+let contactslist = require('./routes/contacts'); // routes for contactslist
 
 let app = express();
 
