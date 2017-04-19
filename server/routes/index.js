@@ -11,109 +11,154 @@ let router = express.Router();
 let mongoose = require('mongoose');
 let passport = require('passport');
 
-// define the user model
+
+
+//define the user models
 let UserModel = require('../models/users');
-let User = UserModel.User; // alias for User Model - User object
+let User = UserModel.User; // Alias for User
 
-// define the game model
-let contactlist = require('../models/contactslist');
+// define the contact model
+let contact = require('../models/contacts');
 
 
-// create a function to check if the user is authenticated
-function requireAuth(req, res, next) {
-  // check if the user is logged in
+//function to check if the user is authenticated
+function requireAuth(req,res,next) {
+  //check if the user is logged index
   if(!req.isAuthenticated()) {
     return res.redirect('/login');
   }
   next();
 }
-
 /* GET home page. wildcard */
 router.get('/', (req, res, next) => {
   res.render('content/index', {
     title: 'Home',
-    contactslist: '',
-    displayName: req.user ? req.user.displayName : ''
+    displayName : req.user ? req.user.displayName : '',
+    contacts: ''
+   });
+});
+
+/* GET about page. */
+router.get('/about', (req, res, next) => {
+  res.render('content/about', {
+    title: 'About',
+    displayName : req.user ? req.user.displayName : '',
+    contacts: ''
+   });
+});
+
+/* GET about page. */
+router.get('/resume', (req, res, next) => {
+  res.render('content/resume', {
+    title: 'Resume',
+    displayName : req.user ? req.user.displayName : '',
+    contacts: ''
    });
 });
 
 
+/* GET about page. */
+router.get('/skills', (req, res, next) => {
+  res.render('content/skills', {
+    title: 'Skills',
+    displayName : req.user ? req.user.displayName : '',
+    contacts: ''
+   });
+});
 
-// GET /login - render the login view
-router.get('/login', (req, res, next)=>{
-  // check to see if the user is not logged in yet
-  if(!req.user) {
-    // render the login page
-    res.render('auth/login', {
-      title: "Login",
-      contactslist: '',
-      messages: req.flash('loginMessage'),
-      displayName: req.user ? req.user.displayName : ''
+
+/* GET about page. */
+router.get('/contactme', (req, res, next) => {
+  res.render('content/contactme', {
+    title: 'Contact Me',
+    displayName : req.user ? req.user.displayName : '',
+    contacts: ''
+   });
+});
+
+
+/* GET /Login - render the Login view*/
+router.get('/login',(req,res,next) => {
+// check to see if the user is not already logged in
+  if(!req.User){
+    //render the login page
+    res.render('auth/login',{
+      title : 'Login',
+      contacts : '',
+      messages : req.flash('loginMessage'),
+      displayName : req.user ? req.user.displayName : ''
+
     });
     return;
-  } else {
-    return res.redirect('/contactslist'); // redirect to games list
   }
-}); 
-
-// POST /login - process the login attempt
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/contactslist',
-  failureRedirect: '/login',
-  failureFlash: 'bad login'
-}));
-
-
-// GET /register - render the registration view
-router.get('/register', (req, res, next)=>{
-   // check to see if the user is not already logged in
-  if(!req.user) {
-    // render the registration page
-      res.render('auth/register', {
-      title: "Register",
-      contactslist: '',
-      messages: req.flash('registerMessage'),
-      displayName: req.user ? req.user.displayName : ''
-    });
-    return;
-  } else {
-    return res.redirect('/contactslist'); // redirect to games list
+  else{
+    return res.redirect('/contact') // rediredct to the game list
   }
 });
 
-// POST / register - process the registration submission
-router.post('/register', (req, res, next)=>{
+//POST /Login - process the Login Page
+router.post('/login', passport.authenticate('local',{
+  successRedirect : '/contact',
+  failureRedirect : '/login',
+  failureFlash : 'bad login'
+}));
+
+
+// GET /register - render the register page
+router.get('/register' ,(req,res,next) => {
+  // check if the user is not already logged in
+  if(!req.user)
+  {
+    // render the register page
+    res.render('auth/register',{
+      title : 'Register',
+      contacts : '',
+      messages : req.flash('registerMessage'),
+      displayName : req.user ? req.user.displayName : ''
+    });
+    return;
+  }
+  else
+  {
+    return res.redirect('/contact'); // redirect to games list
+  }
+  
+});
+
+//POST //register - process the registration page
+router.post('/register',(req,res,next)=>{
   User.register(
     new User({
-      username: req.body.username,
-      email: req.body.email,
-      displayName: req.body.displayName
-    }),
-    req.body.password,
-    (err) => {
-      if(err) {
-        console.log('Error inserting new user');
-        if(err.name == "UserExistsError") {
-          req.flash('registerMessage', 'Registration Error: User Already Exists');
+        username : req.body.username,
+        password : req.body.password,
+        email : req.body.email,
+        displayName : req.body.displayName
+      }),
+      req.body.password,
+      (err) => {
+        if(err){
+          console.log('Error inserting new user');
+          if(err.name == 'UserExistError') {
+          req.flash('registerMessage' , 'Registration error : user already Exist');
         }
-        return res.render('auth/register', {
-          title: "Register",
-          contactslist: '',
-          messages: req.flash('registerMessage'),
-          displayName: req.user ? req.user.displayName : ''
+        return res.render('auth/register',{
+            title : 'Register',
+            contacts : '',
+            messages : req.flash('registerMessage'),
+            displayName : req.user ? req.user.displayName : ''
         });
       }
-      // if registration is successful
-      return passport.authenticate('local')(req, res, ()=>{
-        res.redirect('/contactslist');
+      // if Registration is successfull
+      return passport.authenticate('local')(req,res,()=> {
+          res.redirect('/contact');
       });
     });
 });
 
-// GET /logout - process the logout request
-router.get('/logout', (req, res, next)=>{
+//GET /logout - logout the user and redirect to the home page
+router.get('/logout',(req,res,next) => {
   req.logout();
-  res.redirect('/'); // redirect to the home page
+  res.redirect('/'); // redirect to homepage
 });
 
 
