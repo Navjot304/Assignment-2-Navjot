@@ -1,0 +1,48 @@
+<% include ../partials/header.ejs %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <h1 align="center">Contact Me</h1>
+             <form class="well form-horizontal" action=" " method="post"  id="contact_form">
+<fieldset>
+
+<div class="container" >
+<div class="row">
+  
+  <form role="form" action="" method="post" >
+    
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label for="InputName"> Your Name </label>
+        <div class="input-group">
+          <input type="text" style="width:400px;" class="form-control" name="InputName" id="InputName" placeholder="Enter Name" required>
+          </div> 
+    </div>
+      <div class="form-group">
+        <label for="InputEmail">Your Email</label>
+        <div class="input-group">
+          <input type="email" style="width:400px;" class="form-control" id="InputEmail" name="InputEmail" placeholder="Enter Email" required  >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="InputMessage">Message</label>
+        <div class="input-group">
+          <textarea name="InputMessage" style="width:400px;" id="InputMessage" class="form-control" placeholder="Enter Message" rows="5" required></textarea>
+        </div>
+      </div>
+      
+      <input type="submit" name="submit" id="submit" style="width:200px;" value="Submit" class="btn btn-info pull-left">
+    </div>
+  </form>
+  <hr class="featurette-divider hidden-lg">
+  
+
+        </div>
+      </div>
+    </div>
+
+<% include ../partials/footer.ejs %>
+
+
