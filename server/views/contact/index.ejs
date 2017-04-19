@@ -1,0 +1,55 @@
+<% include ../partials/header.ejs %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+          <h3>Business Contact List </h3>
+          
+          <a href="contact/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a new Business Contact</a>
+          <br>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Number</th>
+                  <th class="text-center">Email</th>
+                  <th class="text-center"></th>
+                  <th class="text-center"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Template Row -->
+                <% for (let count = 0; count < contact.length; count++) { %>
+                <tr>
+                  
+                  <td class="text-center"><%= contact[count].name %></td>
+                  <td class="text-center"><%= contact[count].number %></td>
+                  <td class="text-center"><%= contact[count].email %></td>
+
+                  <!-- Edit Button -->
+                  <td class="text-center">
+                  <a class="btn btn-primary" href="/contact/<%= contact[count]._id %>"  role="button"><i class="fa fa-pencil-square-o"></i>Edit</a>
+                  </td>
+                  <!-- Delete Button -->
+                  <td class="text-center">
+                   <a class="btn btn-danger" href="/contact/delete/<%= contact[count]._id %>" role="button"><i class="fa fa-trash-o"></i>Delete</a>
+                   </td>
+                 
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+           <div class="col-md-offset-1 col-md-10 text-center">
+            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% include ../partials/footer.ejs %>
+
+

@@ -1,0 +1,33 @@
+<% include ../partials/header.ejs %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <h1><%= title %></h1>
+            <form class="form" method="post">
+              <div class="form-group">
+                <label for="NameTextField">Name</label>
+                <input type="text" class="form-control" id="NameTextField"
+                placeholder="Name" name="name" value="<%= contact.name %>" required>
+              </div>
+              <div class="form-group">
+                <label for="NumberTextField">Number</label>
+                <input type="text" class="form-control" id="NumberTextField"
+                placeholder="Number" name="number" value="<%= contact.number %>"  required>
+              </div>
+              <div class="form-group">
+                <label for="EmailTextField">Email</label>
+                <input type="text" class="form-control" id="EmailTextField"
+                placeholder="Email" name="email" value="<%= contact.email %>"  required>
+              </div>
+              
+              <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Submit</button>
+              <a class="btn btn-danger" href="/contact/delete/<%= contact._id %>" role="button"><i class="fa fa-trash-o"></i>Delete Contact</a>
+              <a href="/contact" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
+            </form>
+        </div>
+      </div>
+    </div>
+
+<% include ../partials/footer.ejs %>
