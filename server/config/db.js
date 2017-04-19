@@ -8,7 +8,7 @@ Web app name: https://comp308-2017-midterm-300869349.herokuapp.com/
 
 module.exports = {
   //local MongoDB deployment ->
- // "URI": "mongodb://localhost/contactlist308"
+ "URI": "mongodb://localhost/contactslist"
   //Remote MongoDB deployment -> let 
-  "URI": "mongodb://thomas:123456@ds161059.mlab.com:61059/contactslist308"
+ // "URI": "mongodb://thomas:123456@ds161059.mlab.com:61059/contactslist308"
 };
